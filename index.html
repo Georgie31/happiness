@@ -1,21 +1,68 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>True happiness</title>
+    <style>
+        body{
+            background-color: deepskyblue;
+        }
+        .left_box{
+            position: fixed;
+            width: 100px;
+            height: 100px;
+            top: 50%;
+            left: 0%;
+            margin-top: -100px;
+            margin-left: 0px;
+        }
+        .top_box{
+            position: fixed;
+            width: 200px;
+            height: 100px;
+            top: 25%;
+            left: 50%;
+            margin-top: -50px;
+            margin-left: -100px;
+        }
+        .right_box{
+            position: fixed;
+            width: 100px;
+            height: 100px;
+            top: 50%;
+            left: 100%;
+            margin-top: -100px;
+            margin-left: -100px;
+        }
+    </style>
+    <title>True happiness</title>
 </head>
 <body>
+    <div class="top_box" id="top_box"><p class="happiness" id="happiness"></p></div>
+    <div class="left_box" id="left_box"> <img src="./Images/EN.png"> </div>
+    <div class="right_box" id="right_box"> <img src="./Images/NL.png"> </div>
 
-<p id="happiness"></p>
+    <script>
+        var date1 = new Date('01/01/2022');
+        var date2 = new Date();
 
-<script>
-    var date1 = new Date('01/01/2022');
-    var date2 = new Date();
+        var start = new Date(2021, 11, 17), 
+        end = new Date(2022, 0, 1), 
+        today = new Date(), 
+        p = Math.round(((today - start) / (end - start)) * 100);
+        console.log(p);
 
-    var difference = date1.getTime() - date2.getTime();
-    var days = Math.ceil(difference / (1000 * 3600 * 24));
-    var text = 'Days until 2 souls meet and happiness is achieved: ' + days;
-    document.getElementById("happiness").innerHTML = text;
-</script>
+        var difference = date1.getTime() - date2.getTime();
+        var days = Math.ceil(difference / (1000 * 3600 * 24));
+        var text = 'Days until 2 souls meet and happiness is achieved: ' + days;
+
+        document.getElementById("happiness").innerHTML = text;
+        document.getElementById("left_box").style.left = 0 + p + '%';
+        document.getElementById("right_box").style.left = 100 - p + '%';
+
+
+        function scale(number, inMin, inMax, outMin, outMax){
+            return (number - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
+        }
+    </script>
 
 </body>
 </html> 
