@@ -85,67 +85,103 @@ li span {
     <title>Next meeting</title>
 </head>
 <body>
+
     <div class="container">
-        <h1 id="headline">Countdown to Natalie flying over</h1>
-        <div id="countdown">
+      <h1 id="georgieHeadline">Countdown to Georgie flying to England</h1>
+      <div id="georgieCountdown">
+        <ul>
+          <li><span id="georgieDays"></span>days</li>
+          <li><span id="georgieHours"></span>Hours</li>
+          <li><span id="georgieMinutes"></span>Minutes</li>
+          <li><span id="georgieSeconds"></span>Seconds</li>
+        </ul>
+      </div>
+      <div id="georgieContent" class="emoji">
+        <span>✈️</span>
+        <span>🎉</span>
+        <span>🥰</span>
+      </div>
+    </div>
+    
+    <div class="container">
+        <h1 id="natalieHeadline">Countdown to Natalie flying to the Netherlands</h1>
+        <div id="natalieCountdown">
           <ul>
-            <li><span id="days"></span>days</li>
-            <li><span id="hours"></span>Hours</li>
-            <li><span id="minutes"></span>Minutes</li>
-            <li><span id="seconds"></span>Seconds</li>
+            <li><span id="natalieDays"></span>days</li>
+            <li><span id="natalieHours"></span>Hours</li>
+            <li><span id="natalieMinutes"></span>Minutes</li>
+            <li><span id="natalieSeconds"></span>Seconds</li>
           </ul>
         </div>
-        <div id="content" class="emoji">
-          <span>🥳</span>
+        <div id="natalieContent" class="emoji">
+          <span>✈️</span>
           <span>🎉</span>
-          <span>🎂</span>
+          <span>🥰</span>
         </div>
       </div>
 
     <script>
         (function () {
-  const second = 1000,
-        minute = second * 60,
-        hour = minute * 60,
-        day = hour * 24;
+      const second = 1000,
+            minute = second * 60,
+            hour = minute * 60,
+            day = hour * 24;
 
-        //I'm adding this section so I don't have to keep updating this pen every year :-)
-        //remove this if you don't need it
-        let today = new Date(),
-            dd = String(today.getDate()).padStart(2, "0"),
-            mm = String(today.getMonth() + 1).padStart(2, "0"),
-            yyyy = today.getFullYear(),
-            nextYear = yyyy + 1,
-            dayMonth = "04/13/",
-            birthday = dayMonth + yyyy;
-        
-        today = mm + "/" + dd + "/" + yyyy;
-        if (today > birthday) {
-            birthday = dayMonth + nextYear;
-        }
-        //end
-  
-    const countDown = new Date(birthday).getTime(),
-      x = setInterval(function() {    
+            //I'm adding this section so I don't have to keep updating this pen every year :-)
+            //remove this if you don't need it
+            let today = new Date(),
+                dd = String(today.getDate()).padStart(2, "0"),
+                mm = String(today.getMonth() + 1).padStart(2, "0"),
+                yyyy = today.getFullYear(),
+                nextYear = yyyy + 1,
+                natalieDayMonth = "04/13/",
+                natalieTravel = natalieDayMonth + yyyy,
+                georgieDayMonth = "02/18/",
+                georgieTravel = georgieDayMonth + yyyy;
+            
+            today = mm + "/" + dd + "/" + yyyy;
+            if (today > natalieTravel) {
+              natalieTravel = natalieDayMonth + nextYear;
+            }
 
-        const now = new Date().getTime(),
-              distance = countDown - now;
+            if(today > georgieTravel){
+              georgieTravel = georgieDayMonth + nextYear;
+            }
+            //end
+      
+          const natalieCountDown = new Date(natalieTravel).getTime(),
+          georgieCountDown = new Date(georgieTravel).getTime(),
+          x = setInterval(function() {    
 
-        document.getElementById("days").innerText = Math.floor(distance / (day)),
-          document.getElementById("hours").innerText = Math.floor((distance % (day)) / (hour)),
-          document.getElementById("minutes").innerText = Math.floor((distance % (hour)) / (minute)),
-          document.getElementById("seconds").innerText = Math.floor((distance % (minute)) / second);
+            const now = new Date().getTime(),
+                  natalieDistance = natalieCountDown - now,
+                  georgieDistance = georgieCountDown - now;
 
-        //do something later when date is reached
-        if (distance < 0) {
-          document.getElementById("headline").innerText = "WE ARE TRAVELING NOW";
-          document.getElementById("countdown").style.display = "none";
-          document.getElementById("content").style.display = "block";
-          clearInterval(x);
-        }
-        //seconds
-      }, 0)
-  }());
+              document.getElementById("georgieDays").innerText = Math.floor(georgieDistance / (day)),
+              document.getElementById("georgieHours").innerText = Math.floor((georgieDistance % (day)) / (hour)),
+              document.getElementById("georgieMinutes").innerText = Math.floor((georgieDistance % (hour)) / (minute)),
+              document.getElementById("georgieSeconds").innerText = Math.floor((georgieDistance % (minute)) / second);
+              
+              document.getElementById("natalieDays").innerText = Math.floor(natalieDistance / (day)),
+              document.getElementById("natalieHours").innerText = Math.floor((natalieDistance % (day)) / (hour)),
+              document.getElementById("natalieMinutes").innerText = Math.floor((natalieDistance % (hour)) / (minute)),
+              document.getElementById("natalieSeconds").innerText = Math.floor((natalieDistance % (minute)) / second);
+
+            //do something later when date is reached
+            if (natalieDistance < 0) {
+              document.getElementById("natalieHeadline").innerText = "WE ARE TRAVELING NOW";
+              document.getElementById("natalieCountdown").style.display = "none";
+              document.getElementById("natalieContent").style.display = "block";
+              clearInterval(x);
+            }else if(georgieDistance < 0){
+              document.getElementById("georgieHeadline").innerText = "WE ARE TRAVELING NOW";
+              document.getElementById("georgieCountdown").style.display = "none";
+              document.getElementById("georgieContent").style.display = "block";
+              clearInterval(x);
+            }
+            //seconds
+          }, 0)
+      }());
     </script>
 
 </body>
